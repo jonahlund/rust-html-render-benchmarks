@@ -986,7 +986,8 @@ dependencies = [
  "serde_json",
  "tera",
  "tinytemplate",
- "vy",
+ "vy 0.1.0",
+ "vy 0.2.0",
 ]
 
 [[package]]
@@ -1190,8 +1191,16 @@ version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "002f5f74776c9c6430af65e2f37c7ee927d7f10b54a22bdcbc32033f08b89835"
 dependencies = [
- "vy-core",
- "vy-macros",
+ "vy-core 0.1.0",
+ "vy-macros 0.1.0",
+]
+
+[[package]]
+name = "vy"
+version = "0.2.0"
+dependencies = [
+ "vy-core 0.2.0",
+ "vy-macros 0.2.0",
 ]
 
 [[package]]
@@ -1199,6 +1208,14 @@ name = "vy-core"
 version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "23a53dc67f2b05a1ef53aee97bbb69b51fb62f59560021c95f7054ea185808a3"
+dependencies = [
+ "itoap",
+ "ryu",
+]
+
+[[package]]
+name = "vy-core"
+version = "0.2.0"
 dependencies = [
  "itoap",
  "ryu",
@@ -1214,7 +1231,17 @@ dependencies = [
  "quote",
  "syn 2.0.48",
  "tiny-rsx",
- "vy-core",
+ "vy-core 0.1.0",
+]
+
+[[package]]
+name = "vy-macros"
+version = "0.2.0"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.48",
+ "vy-core 0.2.0",
 ]
 
 [[package]]

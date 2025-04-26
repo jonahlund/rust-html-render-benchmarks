@@ -1,3 +1,6 @@
+extern crate vy_0_2 as vy;
+use vy::prelude::*;
+
 fn main() {
     divan::main()
 }
@@ -19,17 +22,8 @@ fn big_table(bencher: divan::Bencher) {
 }
 
 fn big_table_render(rows: &Vec<Vec<usize>>) -> String {
-    vy::render! {
-        <table>
-            {rows.iter().map(|cols| vy::lazy! {
-                <tr>
-                    {cols.iter().map(|col| vy::lazy! {
-                        <td>{*col}</td>
-                    })}
-                </tr>
-            })}
-        </table>
-    }
+    let page = table!(rows.iter().map(|row| tr!(row.iter().map(|col| td!(*col)))));
+    page.into_string()
 }
 
 #[divan::bench]
@@ -60,23 +54,22 @@ fn teams(bencher: divan::Bencher) {
 }
 
 fn teams_render(teams: &Teams) -> String {
-    vy::render! {
-        <html>
-            <head>
-                <title>{teams.year}</title>
-            </head>
-            <body>
-                <h1>"CSL "{teams.year}</h1>
-                <ul>
-                    {teams.teams.iter().enumerate().map(|(idx, team)| vy::lazy! {
-                        <li class={if idx == 0 { "champion" } else { "" }}>
-                            <b>{&team.name}</b>": "{team.score}
-                        </li>
-                    })}
-                </ul>
-            </body>
-        </html>
-    }
+    let page = html!(
+        head!(title!(teams.year)),
+        body!(
+            h1!("CSL ", teams.year),
+            ul!(teams.teams.iter().enumerate().map(|(idx, team)| {
+                li!(
+                    class? = (idx == 0).then_some("champion"),
+                    b!(&team.name),
+                    ": ",
+                    team.score
+                )
+            }))
+        )
+    );
+
+    page.into_string()
 }
 
 struct Teams {

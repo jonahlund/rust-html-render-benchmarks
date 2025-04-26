@@ -17,7 +17,8 @@ serde_json = "1.0.111"
 minijinja = "1.0.10"
 html-node = "0.5.0"
 hypertext = "0.3.0"
-vy = "0.1.0"
+vy_0_1 = { package = "vy", version = "0.1.0" }
+vy_0_2 = { package = "vy", path = "/home/jlund/git/vy" }
 
 [[bench]]
 name = "hyped"
@@ -56,5 +57,9 @@ name = "hypertext"
 harness = false
 
 [[bench]]
-name = "vy"
+name = "vy_0_1"
+harness = false
+
+[[bench]]
+name = "vy_0_2"
 harness = false
